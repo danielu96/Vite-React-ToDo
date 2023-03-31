@@ -41,7 +41,7 @@
   color: #888;
 }
 .container{
-  position: fixed;
+  position: relative;
   border: 1px solid gray;
   box-shadow: #888 5px;
   width: 400px;
