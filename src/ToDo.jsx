@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
 const ToDo = () => {
-  return (
+  const [newItemName, setNewItemName] = useState('');
 
+const add = (e) =>{
+  e.preventDefault(); 
+return (
+  console.log(newItemName)
+)
+}
+  return (
     <div className='container'> 
-    <div className='form-control'>
+    <div  classsName='form-control' tyle={{marginLeft:'10px'}} >
       <input
       type='text'
+      onChange={(e) => setNewItemName(e.target.value)}
+      value={newItemName}
       />
     </div>
-    <button className='button'>add </button>
+    <button  className='button' onClick={add}>add </button>
     </div>
   )
 }
