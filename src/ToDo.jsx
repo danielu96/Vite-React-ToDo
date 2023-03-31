@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-const ToDo = () => {
+const ToDo = ({addItem}) => {
   const [newItemName, setNewItemName] = useState('');
 
 const add = (e) =>{
   e.preventDefault(); 
+  if(!newItemName)return;
+  addItem(newItemName);
+  setNewItemName('');
+
 return (
   console.log(newItemName)
 )
