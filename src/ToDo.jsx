@@ -4,7 +4,11 @@ const ToDo = () => {
   return (
 
     <div className='container'> 
-    <form className='form'></form>
+    <div className='form-control'>
+      <input
+      type='text'
+      />
+    </div>
     <button className='button'>add </button>
     </div>
   )
