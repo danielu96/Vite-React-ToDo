@@ -6,20 +6,20 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-     
-      <h1>Vite-ToDo </h1>
-      <ToDo/>
+    <>
+     <h1>Vite-ToDo </h1>
+    <ToDo/>
+    <div className="App">             
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
-        </button>
-      
+        </button>      
       </div>
       <p className="read-the-docs">
         will be todo 
       </p>
     </div>
+    </>
   )
 }
 
