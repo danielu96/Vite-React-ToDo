@@ -43,8 +43,9 @@
 .container{
   position: fixed;
   border: 1px solid gray;
-  width: 300px;
+  box-shadow: #888 5px;
+  width: 400px;
   height: auto;
-  margin-bottom: 2rem;
+  margin: 1rem auto 2rem auto;
 
 }
