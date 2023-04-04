@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const ToDo = ({addItem}) => {
   const [newItemName, setNewItemName] = useState('');
 
-const add = (e) =>{
+const handleSubmit = (e) =>{
   e.preventDefault(); 
   if(!newItemName)return;
   addItem(newItemName);
@@ -15,14 +15,15 @@ return (
 }
   return (
     <div className='container'> 
-    <div  classsName='form-control' tyle={{marginLeft:'10px'}} >
+    <form onSubmit={handleSubmit} >
       <input
       type='text'
-      onChange={(e) => setNewItemName(e.target.value)}
+      style={{marginRight:'1rem'}}
+      onChange={(event) => setNewItemName(event.target.value)}
       value={newItemName}
       />
-    </div>
-    <button  className='button' onClick={add}>add </button>
+    </form>
+    <button  className='button' onClick={handleSubmit}>add </button>
     </div>
   )
 }
