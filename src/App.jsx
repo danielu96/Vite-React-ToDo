@@ -17,12 +17,25 @@ function App() {
     setItems([...items, newItem])
   }
 
+  const removeItem = (id) => {
+    setItems(items.filter((item) => item.id !== id));
+    // setItems=([newItems]);
+    console.log('erty')
+  
+  }
+  const clearItems =() =>{
+     setItems([])
+     console.log('er')
+  }
+
   return (
     <>
      <h1>Vite-ToDo </h1>
     <ToDo addItem={addItem}/>
-    <Items items={items} />
-    <div className="App">             
+    <Items items={items} removeItem={removeItem} />
+    <div className="App">  
+    <p>{items.length}</p>
+    <button onClick={()=> clearItems()}>clear</button>           
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
