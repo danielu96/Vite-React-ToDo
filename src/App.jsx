@@ -15,7 +15,8 @@ const getLocalStorage = () => {
 function App() {
   // const [count, setCount] = useState(0);
   const [items,setItems] = useState(getLocalStorage());
-
+  const [isEditing, setIsEditing] = useState(false);
+  const [editID, setEditID] = useState(null);
 
   const addItem = (itemName) => {
     const newItem = {
@@ -35,6 +36,14 @@ function App() {
      setItems([])
      console.log('er')
   }
+  const editItem = (id) => {
+    const specificItem = items.find((item) => item.id === id);
+    setIsEditing(true);
+    setEditID(id);
+    setName(specificItem.title);
+  };
+
+
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
   }, [items]);
@@ -42,10 +51,10 @@ function App() {
     <>
      <h1>Vite-ToDo </h1>
     <ToDo addItem={addItem}/>
-    <Items items={items} removeItem={removeItem} />
+    <Items items={items} removeItem={removeItem} editItem={editItem} />
     <div className="App">  
     <p>{items.length}</p>
-    <button onClick={()=> clearItems()}>clear all</button>           
+    <button onClick={clearItems}>clear all</button>           
       <div className="card">
         {/* <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
