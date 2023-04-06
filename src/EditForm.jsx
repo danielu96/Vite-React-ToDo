@@ -1,6 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const EditForm = () => {
+const EditForm = ({editItem, item}) => {
+  const {value,setValue}=useState(item.item);
+
+const handleSubmit = e =>{
+  e.preventDefault();
+  editItem(value,item.id);
+  setValue("")
+}
+
   return (
     <div>
          <div className='container'> 
@@ -8,11 +16,11 @@ const EditForm = () => {
       <input
       type='text'
       style={{marginRight:'1rem'}}
-      onChange={(event) => setNewItemName(event.target.value)}
+      onChange={(event) => setValue(event.target.value)}
       value={newItemName}
       />
     </form>
-    <button  className='button' onClick={handleSubmit}>add </button>
+    <button  className='button' onClick={handleSubmit}>update</button>
     </div>
     </div>
   )
