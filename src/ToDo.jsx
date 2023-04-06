@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
+
 const ToDo = ({addItem}) => {
   const [newItemName, setNewItemName] = useState('');
-
+  
 const handleSubmit = (e) =>{
   e.preventDefault(); 
-  if(!newItemName)return;
+  if(!newItemName)
+  return;
   addItem(newItemName);
   setNewItemName('');
 
@@ -23,7 +25,9 @@ return (
       value={newItemName}
       />
     </form>
-    <button  className='button' onClick={handleSubmit}>add </button>
+    <button  className='button' onClick={handleSubmit} >  
+              
+      add </button>
     </div>
   )
 }
