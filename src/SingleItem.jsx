@@ -1,22 +1,30 @@
 import React from 'react'
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaCheck } from 'react-icons/fa';
 
-const SingleItem = ({item,removeItem,editItem}) => {
+const SingleItem = ({item,removeItem,editItem,toggleComplete}) => {
  
   return (
     <section style={{display:'flex', justifyContent:'space-between'}}>
+      <button>
+      <FaCheck onClick={() => toggleComplete(item.id)}/>
+      </button>
+     
+    
+    <p onClick={() => toggleComplete(item.id)} 
+    className={`${item.completed ? 'completed': ''}
+    `}>{item.name}</p>
+
+    {/* <span>{item.id}</span> */}
     <button
     type='button'
     className='edit-btn'
-    onClick={() => editItem(id)}
-  >
+    onClick={() => editItem(item.id)}
+  >    
     <FaEdit />
   </button>
-    <h2>{item.name}</h2>
-    {/* <span>{item.id}</span> */}
      <button onClick={() => removeItem(item.id)}>x</button>
     
-    
+     
     </section>
   )
 }
