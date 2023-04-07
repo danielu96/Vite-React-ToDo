@@ -55,9 +55,17 @@ function App() {
     const newItem = {
       name: itemName,
       id:nanoid(),
+     
     };
-    setItems([...items, newItem])
+    setItems([...items, newItem, ])
   }
+// const renameItem=(index,newItemName){
+//   setItems(value: prev => {
+// const newItems =[...prev];
+// newItems[index].name= newItemName;
+// return newItems;
+//   })
+// }
 
   const removeItem = (id) => {
     setItems(items.filter((item) => item.id !== id));    
@@ -68,25 +76,32 @@ function App() {
      setItems([])
      console.log('clear')
   }
-  const editItem = (id) => {
-    const specificItem = items.find((item) => item.id === id);
+  const editItem = id => {
+    setItems(items.map(item=> item.id===id ? 
+      {...item, isEditing : !item.isEditing} : item))
+  }
+  const toggleComplete = id => {
+    setItems(items.map(item => item.id ===id ?
+       {...item, completed : !item.completed} : item))
     
-    console.log(id);
-    setIsEditing(true);
-    setEditID(id);
-    setNewItemName(specificItem.name);
+  }
+//   const editItem = (id) => {
+//     const specificItem = items.find((item) => item.id === id);
+    
+//     console.log(id);
+//     setIsEditing(true);
+//     setEditID(id);
+//     setNewItemName(specificItem.name);
   
-    console.log(specificItem.name);
-    return(
-<p>{specificItem.name}</p>
-    );
-  };
+//     console.log(specificItem.name);
+//     return(
+// <p>{specificItem.name}</p>
+//     );
+//   };
   const showAlert = (show = false, type = '', msg = '') => {
     setAlert({ show, type, msg });
   };
-  const toggleComplete = id => {
-    setItems(items.map(item => item.id ===id ? {...item, completed : !item.completed} : item))
-  }
+ const itemComplete= items.filter(t=> t.completed).lenght;
 
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
@@ -97,9 +112,29 @@ function App() {
 
      <h1>Vite-ToDo </h1>
     <ToDo addItem={addItem}/>
-    <Items items={items} removeItem={removeItem} editItem={editItem} toggleComplete={toggleComplete} />
+
+    {/* {
+    item.isEditing ? (
+    
+    <EditForm key={item.id}item={item} editItem={editItem} removeItem={removeItem}
+    addItems={addItems}toggleComplete={toggleComplete}/>
+    
+   ):
+   (
+  
+    <SingleItem key={item.id}item={item} editItem={editItem} removeItem={removeItem}
+      addItems={addItems}toggleComplete={toggleComplete}/>
+   
+   )} */}
+
+
+
+
+
+
+    <Items items={items} addItem={addItem} removeItem={removeItem} editItem={editItem} toggleComplete={toggleComplete} />
     <div className="App">  
-    <p>{items.length} things i need to do </p>
+    <p>{itemComplete} completed from {items.length}</p>
     <button onClick={clearItems}>clear all</button>           
       <div className="card">
         {/* <button onClick={() => setCount((count) => count + 1)}>
