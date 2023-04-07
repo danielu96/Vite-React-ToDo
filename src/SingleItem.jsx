@@ -7,7 +7,7 @@ const SingleItem = ({item,removeItem,editItem,toggleComplete}) => {
  const [editMode, setEditMode]= useState(false)
   return (
     <section style={ {display:'flex', justifyContent:'space-between'}}>
-      <button style={{width:'4rem'}}>
+      <button style={{width:'4.1rem'}}>
       <div type='checkbox' onClick={() => toggleComplete(item.id)}
       // className={`${item.completed ? 'completed': ''}
       // `}     
