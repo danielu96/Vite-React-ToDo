@@ -3,7 +3,7 @@ import { FaEdit, FaTrash, FaCheck } from 'react-icons/fa';
 import EditForm from './EditForm';
 
 
-const SingleItem = ({item,removeItem,editItem,toggleComplete,renameItem,handleSubmit}) => {
+const SingleItem = ({item,removeItem,editItem,toggleComplete,renameItem,handleSubmit,addItem}) => {
  const [editMode, setEditMode]= useState(false);
  const [newItemName, setNewItemName] = useState('');
   return (
@@ -16,16 +16,16 @@ const SingleItem = ({item,removeItem,editItem,toggleComplete,renameItem,handleSu
       {!item.completed ?  'undone' : 'done'}  </div>
       </button>
          
-    <p 
+    {/* <p 
     onClick={() => toggleComplete(item.id)} 
     className={`${item.completed ? 'completed': ''}
     `}
-    > {item.name}</p>
-<span >{
+    > {item.name}</p> */}
+<p >{
 !editMode ? (
 <div onClick={()=> setEditMode(true)}>{item.name}</div>  
 ):(
-  <div className='container'> 
+  <div > 
  
   <form onSubmit={e =>{e.preventDefault();setEditMode(false)}} >
     <input
@@ -34,15 +34,16 @@ const SingleItem = ({item,removeItem,editItem,toggleComplete,renameItem,handleSu
     onChange={(event) => setNewItemName(event.target.value)}
     value={newItemName}
     />
-  </form>
-  <button  className='button' onClick={handleSubmit} >  
+    <button  className='button' onClick={renameItem} >  
             
-    update </button>
+            update </button>
+  </form>
+  
   </div>
 
 
 )
-}</span>
+}</p>
     
     <button
     type='button'
