@@ -34,27 +34,22 @@ const SingleItem = ({item,removeItem,editItem,toggleComplete,renameItem,handleSu
     onChange={(event) => setNewItemName(event.target.value)}
     value={newItemName}
     />
-  <button className='button' onClick={renameItem} >  update </button>
+  <button className='button' onClick={renameItem} >update</button>
   </form>
   
   </div>)
-}</article>
-    
+}</article>    
     <button
     type='button'
     className='edit-btn'
-    onClick={() => renameItem(item.id)}
-    
-  >   
-  
+    // onClick={() => renameItem(item.id)}   
+      onClick={()=> setEditMode(true)}  
+      >
     <FaEdit />
   </button>
      <button 
-      onClick={() => removeItem(item.id)}
-    //  onClick={()=> setEditMode(true)}
-     >x</button>
-    
-     
+      onClick={() => removeItem(item.id)}   
+     >x</button>        
     </section>
   )
 }
