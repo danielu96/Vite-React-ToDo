@@ -55,12 +55,14 @@ function App() {
     const newItem = {
       name: itemName,
       id:nanoid(),
+      done:false,
      
     };
     setItems([...items, newItem, ])
   }
-// const renameItem=(index,newItemName){
-//   setItems(value: prev => {
+
+// function renameItem(index,newItemName) {
+//   setItems(value = prev => {
 // const newItems =[...prev];
 // newItems[index].name= newItemName;
 // return newItems;
@@ -81,14 +83,20 @@ function App() {
       {...item, isEditing : !item.isEditing} : item))
   }
   const toggleComplete = id => {
+   
     setItems(items.map(item => item.id ===id ?
        {...item, completed : !item.completed} : item))
     
   }
+  const renameItem =(id) =>{
+    setItems(items.map(item=> item.id===id ? 
+      {...item, isEditing : !item.isEditing} : item))
+      console.log(id)
+  }
 //   const editItem = (id) => {
 //     const specificItem = items.find((item) => item.id === id);
     
-//     console.log(id);
+//     console.log(id); 
 //     setIsEditing(true);
 //     setEditID(id);
 //     setNewItemName(specificItem.name);
@@ -101,7 +109,7 @@ function App() {
   const showAlert = (show = false, type = '', msg = '') => {
     setAlert({ show, type, msg });
   };
- const itemComplete= items.filter(t=> t.completed).lenght;
+ const itemComplete= items.filter(t=> t.done).lenght;
 
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(items));
@@ -111,28 +119,9 @@ function App() {
       {alert.show && <Alert {...alert} removeAlert={showAlert} items={items} />}
 
      <h1>Vite-ToDo </h1>
-    <ToDo addItem={addItem}/>
-
-    {/* {
-    item.isEditing ? (
-    
-    <EditForm key={item.id}item={item} editItem={editItem} removeItem={removeItem}
-    addItems={addItems}toggleComplete={toggleComplete}/>
-    
-   ):
-   (
-  
-    <SingleItem key={item.id}item={item} editItem={editItem} removeItem={removeItem}
-      addItems={addItems}toggleComplete={toggleComplete}/>
-   
-   )} */}
-
-
-
-
-
-
-    <Items items={items} addItem={addItem} removeItem={removeItem} editItem={editItem} toggleComplete={toggleComplete} />
+    <ToDo addItem={addItem}/> 
+    <Items items={items} addItem={addItem} removeItem={removeItem} editItem={editItem}
+     toggleComplete={toggleComplete} renameItem={renameItem} />
     <div className="App">  
     <p>{itemComplete} completed from {items.length}</p>
     <button onClick={clearItems}>clear all</button>           
@@ -140,10 +129,7 @@ function App() {
         {/* <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>       */}
-      </div>
-      {/* <p className="read-the-docs">
-        will be todo 
-      </p> */}
+      </div>     
     </div>
     </>
   )
