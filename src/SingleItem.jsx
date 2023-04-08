@@ -31,7 +31,7 @@ const SingleItem = ({item,removeItem,editItem,toggleComplete,renameItem,handleSu
     <input
     type='text'
     style={{marginRight:'1rem'}}
-    onChange={(event) => setEditMode(event.target.value)}
+    onChange={(event) => setNewItemName(event.target.value)}
     value={newItemName}
     />
   </form>
