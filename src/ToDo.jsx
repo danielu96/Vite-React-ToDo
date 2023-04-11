@@ -24,10 +24,10 @@ return (
       onChange={(event) => setNewItemName(event.target.value)}
       value={newItemName}
       />
+       <button  className='button' onClick={handleSubmit} >                
+              add </button>
     </form>
-    <button  className='button' onClick={handleSubmit} >  
-              
-      add </button>
+   
     </div>
   )
 }
