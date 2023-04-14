@@ -2,11 +2,18 @@ import {useState} from "react";
 
 const ToDo = ({addItem})=> {
   const [itemName,setItemName] = useState('');
-  function handleSubmit(ev) {
+  const handleSubmit=(ev) =>{
     ev.preventDefault();
-    addItem(itemName);
-    setItemName('');
-  }
+    if(!itemName)
+        return(
+          // showAlert(true, 'danger', 'please enter value')
+          alert('Fill the Form please')
+        )
+        else 
+        addItem(itemName);
+        setItemName('');
+        alert('Succes you just added')    
+           }
   return (
     <div
     className="container">
