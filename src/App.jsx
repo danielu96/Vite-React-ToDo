@@ -2,26 +2,21 @@ import './App.css';
 import ToDo from "./ToDo";
 import SingleItem from "./SingleItem";
 import {useEffect, useState} from "react";
-
 function App() {
   const [tasks,setTasks] = useState([]);
-
   useEffect(() => {
     if (tasks.length === 0) return;
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
-
   useEffect(() => {
     const tasks = JSON.parse(localStorage.getItem('tasks'));
     setTasks(tasks || []);
   }, []);
-
   const addItem=(name) =>{
     setTasks(prev => {
       return [...prev, {name:name,done:false}];
     });
   }
-
  const removeItem=(indexItem) => {
     setTasks(prev => {
       return prev.filter((Object,index) => index !== indexItem);
@@ -29,9 +24,7 @@ function App() {
   }
   const clearItems =() =>{
          setTasks([])
-      }
-      
-
+      }     
   function updateTaskDone(taskIndex, newDone) {
     setTasks(prev => {
       const newTasks = [...prev];
@@ -39,10 +32,8 @@ function App() {
       return newTasks;
     });
   }
-
   const numberComplete = tasks.filter(t => t.done).length;
   const numberTotal = tasks.length;
-
   function getMessage() {
     const percentage = numberComplete/numberTotal * 100;
     if (percentage === 0) {
@@ -53,7 +44,6 @@ function App() {
     }
     return 'Go on';
   }
-
   function renameTask(index,newName) {
     setTasks(prev => {
       const newTasks = [...prev];
@@ -61,9 +51,7 @@ function App() {
       return newTasks;
     })
   }
-
   return (
-
     <div >
       <h1>{numberComplete}/{numberTotal} Complete</h1>
       <h2>{getMessage()}</h2>
@@ -78,7 +66,6 @@ function App() {
     </div>
   );
 }
-
 export default App;
 
 
