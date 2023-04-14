@@ -68,3 +68,7 @@
 .undone{
   color: red;
 }
+.alert {
+  width:300px;
+  color:red;
+}
