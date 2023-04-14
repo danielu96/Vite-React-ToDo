@@ -18,6 +18,7 @@ const SingleItem=({name,done,onToggle,removeItem,Rename}) =>{
         <form onSubmit={ev => {ev.preventDefault();setEditMode(false);}}>
           <input type="text" value={name}
                  onChange={ev => Rename(ev.target.value)} />
+                 <button>update</button>
         </form>
       )}
       <button  onClick={removeItem}>
