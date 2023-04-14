@@ -27,11 +27,9 @@ function App() {
       return prev.filter((Object,index) => index !== indexItem);
     });
   }
-  // function removeItem  (indexToRemove)  {
-  //        setTasks(prev =>{
-  //    return     prev.filter((index) => index !== indexToRemove)
-  //       } );    
-  //       }
+  const clearItems =() =>{
+         setTasks([])
+      }
       
 
   function updateTaskDone(taskIndex, newDone) {
@@ -76,6 +74,7 @@ function App() {
               removeItem={() => removeItem(index)}
               onToggle={done => updateTaskDone(index, done)} />
       ))}
+      <button onClick={()=> clearItems()}>clear all</button>
     </div>
   );
 }
