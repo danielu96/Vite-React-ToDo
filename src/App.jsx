@@ -2,7 +2,14 @@ import './App.css';
 import ToDo from "./ToDo";
 import SingleItem from "./SingleItem";
 import {useEffect, useState} from "react";
+import Alert from './Alert';
 function App() {
+  const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
+ const showAlert = (show = false, type = '', msg = ''
+    ) => {
+       setAlert({ show, type, msg 
+       });
+     };
   const [tasks,setTasks] = useState([]);
   useEffect(() => {
     if (tasks.length === 0) return;
@@ -21,16 +28,19 @@ function App() {
     setTasks(prev => {
       return prev.filter((Object,index) => index !== indexItem);
     });
+    showAlert(true, 'danger', 'you just remove one task');
   }
   const clearItems =() =>{
          setTasks([])
+         showAlert(true, 'danger', 'empty List');
       }     
   function updateTaskDone(taskIndex, newDone) {
     setTasks(prev => {
       const newTasks = [...prev];
       newTasks[taskIndex].done = newDone;
       return newTasks;
-    });
+        });
+       
   }
   const numberComplete = tasks.filter(t => t.done).length;
   const numberTotal = tasks.length;
@@ -44,17 +54,19 @@ function App() {
     }
     return 'Go on';
   }
-  function renameTask(index,newName) {
+  const renameTask=(index,newName)=> {
     setTasks(prev => {
       const newTasks = [...prev];
       newTasks[index].name = newName;
       return newTasks;
     })
+    showAlert(true, 'success', 'you just update task');
   }
   return (
     <div >
       <h1>{numberComplete}/{numberTotal} Complete</h1>
       <h2>{getMessage()}</h2>
+      {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks}/>}
       <ToDo addItem={addItem} />
       {tasks.map((task,index) => (
         <SingleItem {...task}
