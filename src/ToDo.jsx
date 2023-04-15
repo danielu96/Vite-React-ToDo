@@ -1,22 +1,40 @@
 import {useState} from "react";
+import Alert from "./Alert";
 
-const ToDo = ({addItem})=> {
+const ToDo = ({addItem,tasks})=> {
   const [itemName,setItemName] = useState('');
+  const [alert, setAlert] = useState({ show: false,
+     msg: '', type: '' 
+    });
+  const showAlert = (show = false,
+     type = '', msg = ''
+     ) => {
+        setAlert({ show, 
+          type, msg 
+        });
+      };
   const handleSubmit=(ev) =>{
     ev.preventDefault();
     if(!itemName)
         return(
-          // showAlert(true, 'danger', 'please enter value')
-          alert('Fill the Form please')
+          showAlert(true, 'danger', 'please enter value')
+          // alert('Fill the Form please')
+         
         )
         else 
+        showAlert(true, 'success', 'item added to the list');
         addItem(itemName);
         setItemName('');
-        alert('Succes you just added')    
+        // alert('Succes you just added')    
            }
   return (
-    <div
-    className="container">
+    <>
+     {alert.show && <Alert {...alert} 
+        removeAlert={showAlert}
+         tasks={tasks}
+         />}
+    <div className="container">
+       
     <form onSubmit={handleSubmit}>      
       <input type="text"
              value={itemName}
@@ -25,6 +43,7 @@ const ToDo = ({addItem})=> {
              <button>add</button>
     </form>
     </div>
+    </>
   );
 }
 export default ToDo
