@@ -3,7 +3,7 @@ import ToDo from "./ToDo";
 import SingleItem from "./SingleItem";
 import {useEffect, useState} from "react";
 import Alert from './Alert';
-function App() {
+const  App= () =>{
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
  const showAlert = (show = false, type = '', msg = ''
     ) => {
@@ -34,7 +34,7 @@ function App() {
          setTasks([])
          showAlert(true, 'danger', 'empty List');
       }     
-  function updateTaskDone(taskIndex, newDone) {
+  const updateTaskDone=(taskIndex, newDone) =>{
     setTasks(prev => {
       const newTasks = [...prev];
       newTasks[taskIndex].done = newDone;
@@ -44,7 +44,7 @@ function App() {
   }
   const numberComplete = tasks.filter(t => t.done).length;
   const numberTotal = tasks.length;
-  function getMessage() {
+  const getMessage = ()=> {
     const percentage = numberComplete/numberTotal * 100;
     if (percentage === 0) {
       return 'Try to ! ';
@@ -64,7 +64,8 @@ function App() {
   }
   return (
     <div >
-      <h1>{numberComplete}/{numberTotal} Complete</h1>
+      <h1>Vite ToDo</h1>
+      <h2>{numberComplete}/{numberTotal} Complete</h2>
       <h2>{getMessage()}</h2>
       {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks}/>}
       <ToDo addItem={addItem} />
