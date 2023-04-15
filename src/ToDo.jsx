@@ -22,12 +22,12 @@ const ToDo = ({addItem,tasks})=> {
          
         )
         else 
-        showAlert(true, 'success', 'item added to the list');
+        showAlert(true, 'success', 'one task added ');
         addItem(itemName);
         setItemName('');
         // alert('Succes you just added')    
            }
-  return (
+  return ( 
     <>
      {alert.show && <Alert {...alert} 
         removeAlert={showAlert}
