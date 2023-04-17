@@ -2,15 +2,40 @@ import './App.css';
 import ToDo from "./ToDo";
 import SingleItem from "./SingleItem";
 import {useEffect, useState} from "react";
+import ReactPaginate from 'react-paginate';
 import Alert from './Alert';
 const  App= () =>{
+  const [tasks,setTasks] = useState([]);
+  const [currentItems, setCurrentItems] = useState([]);  
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 6;
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(tasks.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(tasks.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage,
+    tasks
+  ]);
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) %
+      tasks.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
+
+
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
  const showAlert = (show = false, type = '', msg = ''
     ) => {
        setAlert({ show, type, msg 
        });
      };
-  const [tasks,setTasks] = useState([]);
+  
   useEffect(() => {
     if (tasks.length === 0) return;
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -63,21 +88,47 @@ const  App= () =>{
     showAlert(true, 'success', 'you just update task');
   }
   return (
+    <>
     <div >
       <h1>Vite ToDo</h1>
       <h2>{numberComplete}/{numberTotal} Complete</h2>
       <h2>{getMessage()}</h2>
       {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks}/>}
       <ToDo addItem={addItem} />
-      {tasks.map((task,index) => (
+      <div  style={{height:'220px'}}>
+      {currentItems.map((task,index) => (
         <SingleItem {...task}
               Rename={newName => renameTask(index,newName)}
               removeItem={() => removeItem(index)}
               onToggle={done => updateTaskDone(index, done)} />
       ))}
       <button onClick={()=> clearItems()}>clear all</button>
+
+
+</div>
     </div>
+    <div style={{top:'1rem'}}>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+        containerClassName={"pagination"}
+        pageLinkClassName={"page-num"}
+        previousLinkClassName={"page-num"}
+        nextLinkClassName={"page-num"}
+        disabledClassName={"disabled"}
+        activeClassName={"active"}
+
+      />
+      </div>
+    </>
+    
   );
+ 
 }
 export default App;
 
