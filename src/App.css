@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +24,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -40,7 +43,8 @@
 .read-the-docs {
   color: #888;
 }
-.container{
+
+.container {
   display: flex;
   position: relative;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 6px 0 rgba(0, 0, 0, 0.19);
@@ -49,23 +53,25 @@
   margin: 1rem auto 2rem auto;
   align-items: center;
   justify-content: center;
- 
-  
+
+
 }
 
 .form-control {
   width: 200px;
   height: 30px;
-  border:1px solid rgb(26, 24, 24);
+  border: 1px solid rgb(26, 24, 24);
   margin-left: 0.5em;
 }
-.completed{
-  
+
+.completed {
+
   text-decoration: line-through;
   opacity: 0.5;
-  
+
 }
-.undone{
+
+.undone {
   color: red;
 }
 
@@ -80,11 +86,69 @@
   letter-spacing: var(--spacing);
   text-transform: capitalize;
 }
+
 .alert-danger {
   color: #721c24;
   background: #f8d7da;
 }
+
 .alert-success {
   color: #155724;
   background: #d4edda;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  gap: 5px;
+}
+
+.pagination .page-num {
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: 400;
+}
+
+.pagination .page-num:hover {
+  background-color: #26769e;
+  color: #feffff;
+}
+
+.pagination .active {
+  background-color: lightgray;
+  border-radius: 8px;
+}
+
+@media only screen and (max-width: 889px) {
+  .pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    gap: 5px;
+  }
+
+  .pagination .page-num {
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 400;
+  }
+
+  .pagination .page-num:hover {
+    background-color: #26769e;
+    color: #feffff;
+  }
+
+  .pagination .active {
+    background-color: lightgray;
+    border-radius: 8px;
+  }
 }
