@@ -10,7 +10,7 @@ const  App= () =>{
   const [currentItems, setCurrentItems] = useState([]);  
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
