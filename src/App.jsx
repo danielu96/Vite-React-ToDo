@@ -1,4 +1,5 @@
 import './App.css';
+import { nanoid, random } from 'nanoid'
 import ToDo from "./ToDo";
 import SingleItem from "./SingleItem";
 import {useEffect, useState} from "react";
@@ -9,7 +10,7 @@ const  App= () =>{
   const [currentItems, setCurrentItems] = useState([]);  
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 6;
+  const itemsPerPage = 3;
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -26,16 +27,12 @@ const  App= () =>{
     );
     setItemOffset(newOffset);
   };
-
-
-
   const [alert, setAlert] = useState({ show: false, msg: '', type: '' });
  const showAlert = (show = false, type = '', msg = ''
     ) => {
        setAlert({ show, type, msg 
        });
-     };
-  
+     };  
   useEffect(() => {
     if (tasks.length === 0) return;
     localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -45,24 +42,45 @@ const  App= () =>{
     setTasks(tasks || []);
   }, []);
   const addItem=(name) =>{
+    const newItem = {
+      name: name,
+      id:nanoid(),
+      done:false,                 
+    };
     setTasks(prev => {
-      return [...prev, {name:name,done:false}];
+      return [...prev, { newItem,name:name
+        // name:name,done:false,id:nanoid()     
+      }];
     });
   }
- const removeItem=(indexItem) => {
+  // const addItem = (name) => {
+  //       const newItem = {
+  //         name: name,
+  //         id:nanoid(),
+  //         completed:false,                 
+  //       };
+  //       setItems([...items, newItem ])
+  //       console.log(name)
+  //     } 
+
+
+
+ const removeItem=(task) => {
     setTasks(prev => {
-      return prev.filter((Object,index) => index !== indexItem);
+      return prev.filter((Object,id) => task !== id);
+      
     });
+    console.log('you deleted',task);
     showAlert(true, 'danger', 'you just remove one task');
   }
   const clearItems =() =>{
          setTasks([])
          showAlert(true, 'danger', 'empty List');
       }     
-  const updateTaskDone=(taskIndex, newDone) =>{
+  const updateTaskDone=(id, newDone) =>{
     setTasks(prev => {
       const newTasks = [...prev];
-      newTasks[taskIndex].done = newDone;
+      newTasks[id].done = newDone;
       return newTasks;
         });
        
@@ -79,10 +97,10 @@ const  App= () =>{
     }
     return 'Go on';
   }
-  const renameTask=(index,newName)=> {
+  const renameTask=(id,newName)=> {
     setTasks(prev => {
       const newTasks = [...prev];
-      newTasks[index].name = newName;
+      newTasks[id].name = newName;
       return newTasks;
     })
     showAlert(true, 'success', 'you just update task');
@@ -96,15 +114,13 @@ const  App= () =>{
       {alert.show && <Alert {...alert} removeAlert={showAlert} tasks={tasks}/>}
       <ToDo addItem={addItem} />
       <div  style={{height:'220px'}}>
-      {currentItems.map((task,index) => (
-        <SingleItem {...task}
-              Rename={newName => renameTask(index,newName)}
-              removeItem={() => removeItem(index)}
-              onToggle={done => updateTaskDone(index, done)} />
+      {currentItems.map((task,id) => (
+        <SingleItem key={id} {...task} 
+              Rename={newName => renameTask(id,newName)}
+              removeItem={() => removeItem(id)}
+              onToggle={done => updateTaskDone(id, done)} />
       ))}
       <button onClick={()=> clearItems()}>clear all</button>
-
-
 </div>
     </div>
     <div style={{top:'1rem'}}>
